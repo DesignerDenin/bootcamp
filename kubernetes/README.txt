@@ -1,0 +1,1 @@
+there's a error which doesn't allow the deployed react app to show details of the books. I'll ask sir and get that fixed.

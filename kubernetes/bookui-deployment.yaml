@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bookui-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: bookui
+  template:
+    metadata:
+      labels:
+        app: bookui
+    spec:
+      containers:
+      - name: bookui
+        image: deninpaul/bookui
+        resources:
+          limits:
+            memory: "356Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bookui-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: bookui
+  ports:
+  - protocol: TCP
+    port: 3000
+    targetPort: 3000
