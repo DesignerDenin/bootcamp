@@ -1,0 +1,275 @@
+openapi: 3.0.3
+info:
+  title: Library Management
+  description: Simple REST API for Library Management System, primarily just to track books
+  version: 1.0.11
+servers:
+  - url: https://librarymanagement.swagger.io/api/v3
+tags:
+  - name: book
+    description: Everything about your books
+paths:
+  /book:
+    get:
+      tags:
+        - book
+      summary: Find available books
+      description: Returns all books
+      operationId: getBook
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Book'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: No Books found
+    put:
+      tags:
+        - book
+      summary: Replace book by ID
+      description: Replace book by ID
+      operationId: replaceBook
+      requestBody:
+        description: Replace book in the store
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Book'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Book'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Book'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Book'
+        '405':
+          description: Invalid input
+    post:
+      tags:
+        - book
+      summary: Add a new book to the library
+      description: Add a new book to the library
+      operationId: addBook
+      requestBody:
+        description: Create a new book in the store
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Book'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Book'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Book'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Book'
+        '405':
+          description: Invalid input
+  /book/search:
+    get:
+      tags:
+        - book
+      summary: Search for books according to author, title or genre
+      description: Rearch for books according to author, title or genre
+      operationId: searchBook
+      parameters:
+        - in: query
+          name: author
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: genre
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: title
+          schema:
+            type: string
+          required: false
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Book'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: No search results found
+  /book/{bookId}:
+    get:
+      tags:
+        - book
+      summary: Find book by ID
+      description: Returns a single book
+      operationId: getBookById
+      parameters:
+        - name: bookId
+          in: path
+          description: ID of book to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Book'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Book not found
+    patch:
+      tags:
+        - book
+      summary: Updates a book in the store with form data
+      description: ''
+      operationId: updateBookById
+      parameters:
+        - name: bookId
+          in: path
+          description: ID of book that needs to be updated
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: name
+          in: query
+          description: Name of book that needs to be updated
+          schema:
+            type: string
+        - name: author
+          in: query
+          description: Author of book that needs to be updated
+          schema:
+            type: string
+        - name: no of pages
+          in: query
+          description: No of pages in the book to be updated
+          schema:
+            type: string
+        - name: publication date
+          in: query
+          description: Publication date of the book to be updated
+          schema:
+            type: string
+        - name: genre
+          in: query
+          description: Genre of the book to be updated
+          schema:
+            type: string
+      responses:
+        '405':
+          description: Invalid input
+    delete:
+      tags:
+        - book
+      summary: Deletes a book
+      description: delete a book
+      operationId: deleteBook
+      parameters:
+        - name: bookId
+          in: path
+          description: Book id to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '400':
+          description: Invalid pet value
+components:
+  schemas:
+    Book:
+      required:
+        - name
+        - isbn
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        isbn:
+          type: integer
+          format: int64
+          example: 2200
+        name:
+          type: string
+          example: Harry Potter
+        author:
+          type: string
+          example: JK Rowling
+        no of pages:
+          type: integer
+          format: int64
+          example: 200
+        publication date:
+          type: string
+          example: 06-07-2020
+        genre:
+          type: string
+          example: Fantasy
+      xml:
+        name: book
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        type:
+          type: string
+        message:
+          type: string
+      xml:
+        name: '##default'
+  requestBodies:
+    Book:
+      description: Book object that needs to be added to the store
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Book'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/Book'

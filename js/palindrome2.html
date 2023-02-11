@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function palindrome() {
+            a = document.getElementById("textfield").value
+            revA = a.split("").reverse().join("")
+        msg;
+
+            if (revA.toLowerCase() == a.toLowerCase())
+                msg = "It is Palindrome"
+            else
+                msg = "It is NOT Palindrome"
+
+            document.getElementById("result").innerHTML = msg
+        }
+    </script>
+
+    <p>
+        Enter Text:
+        <input type="text" id="textfield" />
+    </p>
+
+    <input type="button" onclick="palindrome()" value="Check" />
+
+    <p id="result"></p>
+</body>
+</html>
