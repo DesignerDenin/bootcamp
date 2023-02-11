@@ -1,0 +1,27 @@
+Books
+	bookid (primary key)
+	title
+	author
+	availability
+
+Authors
+	authorid (primary key)
+	name
+
+Book Authors
+	bookid
+	authorid
+
+Members
+	memberid (primary key)
+	name
+	address
+	phone number
+	email id
+	
+Member Loan
+	loanid (primary key)
+	memberid
+	bookid
+	issue_date
+	return_date

@@ -1,0 +1,31 @@
+Blogs collection
+{
+      _id : {integer}
+      Title : {string, required}
+      PostTime : {string}
+      NumComments : {integer},
+      Author : { 
+            UserId : {string, required},
+            Name : {string, required}
+      },
+}
+
+
+Comments collection
+{
+      _id : {integer},
+      BlogId : {string}
+      PostTime :{string} ,
+      Text : {string, required},
+      Author : { 
+            UserId : {string},
+            Name : {string}
+      },
+}
+
+Following collection
+{
+      _id : {integer},
+      FollowerId : {string},
+      FollowingId : {string}
+}
