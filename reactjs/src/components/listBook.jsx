@@ -11,9 +11,9 @@ const ListBook = () => {
         });
     }, [])
 
-    const deleteBook = (bId) => {
-        BookService.deleteBook(bId).then(res => {
-            setBooks(this.state.books.filter(book => book.bId !== bId))
+    const deleteBook = (id) => {
+        BookService.deleteBook(id).then(res => {
+            setBooks(books.filter(book => book.id !== id))
         });
     }
 
