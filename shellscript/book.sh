@@ -25,13 +25,17 @@ create_book(){
 
 update_book(){
     echo "Update Book"
+    curl -i -X PUT -H "Content-Type: application/json" -d '{"name":"'"$2"'","author":"'"$3"'", "genre":"'"$4"'"}'  http://localhost:8080/books/$1
 }
 
 delete_book(){
     echo "Delete Book"
+    curl -i -X DELETE -H "Content-Type: application/json"  http://localhost:8080/books/$1
 }
 
 usage
 get_books
 get_book_id 1
 create_book "Book101" "Author101" "Genre101"
+update_book 2 "Book102" "Author102" "Genre102"
+delete_book 3
