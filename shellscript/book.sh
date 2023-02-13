@@ -20,6 +20,7 @@ get_book_id(){
 
 create_book(){
     echo "Create Book"
+    curl -i -X POST -H "Content-Type: application/json" -d '{"name":"'"$1"'","author":"'"$2"'", "genre":"'"$3"'"}'  http://localhost:8080/books
 }
 
 update_book(){
@@ -31,4 +32,6 @@ delete_book(){
 }
 
 usage
-get_books 1
+get_books
+get_book_id 1
+create_book "Book101" "Author101" "Genre101"
