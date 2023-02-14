@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+
+  each book in msg
+    h4 #{book.name}
+    ul
+        li ID: #{book.id}
+        li NAME: #{book.name}
+        li AUTHOR: #{book.author}
+        li GENRE: #{book.genre}
